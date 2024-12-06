@@ -1,6 +1,8 @@
 # Leaderboard Repository
 
-## Welcome to the **Leaderboard Repository**! 🚀 This repository contains a table that showcases scores of people. It's designed to be an open and collaborative project, and we welcome contributions from developers of all skill levels.
+# Welcome to the **Leaderboard Repository**! 🚀 
+
+### This repository contains a table that showcases scores of people. It's designed to be an open and collaborative project, and we welcome contributions from developers of all skill levels.
 
 ## The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
 
