@@ -1,10 +1,10 @@
 # Leaderboard Repository
 
-Welcome to the **Leaderboard Repository**! 🚀 This repository contains a table that showcases scores of people. It's designed to be an open and collaborative project, and we welcome contributions from developers of all skill levels.
+## Welcome to the **Leaderboard Repository**! 🚀 This repository contains a table that showcases scores of people. It's designed to be an open and collaborative project, and we welcome contributions from developers of all skill levels.
 
-The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
+## The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
 
-Here's what it looks like before any of the isses are resolved
+### Here's what it looks like before any of the isses are resolved
 ![image](https://github.com/user-attachments/assets/13262ea1-a9f6-4951-81ad-94da7f318d03)
 
 
