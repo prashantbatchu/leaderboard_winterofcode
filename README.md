@@ -48,7 +48,7 @@ We encourage everyone to contribute to this project by resolving issues or addin
 - Provide clear and concise commit messages.
 - Test your code before submitting a pull request.
 - Earn points :)
-- 
+
 ---
 
 ## ⭐ Acknowledgements
