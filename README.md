@@ -22,7 +22,7 @@ We encourage everyone to contribute to this project by resolving issues or addin
 
 ### 1. Check the Issues Tab
    - Navigate to the [**Issues tab**](../../issues).
-   - Look for issues labeled `good first issue` or any open issue that interests you.
+   - Look for any open issue that interests you.
    - Read the description and comments to understand what needs to be done.
 
 ### 2. Fork the Repository
