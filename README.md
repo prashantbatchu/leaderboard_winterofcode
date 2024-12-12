@@ -3,6 +3,7 @@
 # Welcome to the **Leaderboard Repository**! 🚀
 
 This project showcases a leaderboard where user scores are displayed dynamically in a table. It is designed to be interactive and collaborative, allowing users to search, filter, and navigate through the data. The project uses a simple tech stack and is easily extendable.
+
 <u>**PRs from only students of IIEST, Shibpur will be accepted. If you're someone who's not from this college, kindly ignore this repo**</u>
 ---
 ## The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
