@@ -5,7 +5,8 @@
 This project showcases a leaderboard where user scores are displayed dynamically in a table. It is designed to be interactive and collaborative, allowing users to search, filter, and navigate through the data. The project uses a simple tech stack and is easily extendable.
 
 ---
-
+## The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
+![image](https://github.com/user-attachments/assets/13262ea1-a9f6-4951-81ad-94da7f318d03)
 ## **Tech Stack**
 
 1. **HTML**: For the structure and layout of the web application.
