@@ -3,7 +3,7 @@
 # Welcome to the **Leaderboard Repository**! 🚀
 
 This project showcases a leaderboard where user scores are displayed dynamically in a table. It is designed to be interactive and collaborative, allowing users to search, filter, and navigate through the data. The project uses a simple tech stack and is easily extendable.
-
+<u>**PRs from only students of IIEST, Shibpur will be accepted. If you're someone who's not from this college, kindly ignore this repo**</u>
 ---
 ## The page is also live and you can visit it [here](https://leaderboard-winterofcode.vercel.app/)
 ![image](https://github.com/user-attachments/assets/13262ea1-a9f6-4951-81ad-94da7f318d03)
@@ -132,11 +132,8 @@ You can deploy the project on any static hosting service like GitHub Pages, Netl
 
 ## **API Integration**
 
-The leaderboard data is fetched from the following API:
+The leaderboard data is fetched from API:
 
-```
-https://script.google.com/macros/s/AKfycbx2_dsVB0Z1dX8l_m7VGy_8VB0qFts5PlWbx_mZwD6jxaq-hdxxBDvK_dKwzIqJt8LgEQ/exec
-```
 
 - The API returns an array of data where each row contains:
   - `Name`: The name of the individual.
@@ -215,5 +212,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 Feel free to open issues or reach out if you have any questions or feedback!
-```
+
 
