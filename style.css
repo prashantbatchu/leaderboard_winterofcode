@@ -137,7 +137,7 @@ body{
   display: flex;
   align-items: center;
 
-  em {
+  strong {
     margin-left: 10px;
     font-size: 1rem;
   }
