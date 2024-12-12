@@ -1,6 +1,33 @@
 /* General table container styling */
+/*Added two data themes for dark and light mode*/
+:root{
+  --bg-color:#242525;
+  --color-1:white;
+  --color-2:#272626;
+  --color-3:rgba(0, 0, 0, 0.1);
+  --color-4:#39993c;
+  --color-5:#ddd;
+  --color-6:#1e1e1e;
+  --color-7:black;
+  --color-8:#999;
+  --color-9:#2c2a2a;
+}
+[data-theme="light"]{
+  --bg-color: #F0F0F0;
+  --color-1: #000000;
+  --color-2: #E0E0E0;
+  --color-3: rgba(255, 255, 255, 0.9);
+  --color-4: #66BB6A;
+  --color-5: #333333;
+  --color-6: #FFFFFF;
+  --color-7: #FFFFFF;
+  --color-8: #CCCCCC;
+  --color-9: #F5F5F5;
+}
+/*end*/
+
 body{
-    background-color: #242525;
+    background-color:var(--bg-color);
 }
 
 
@@ -22,29 +49,29 @@ body{
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    background-color: #272626;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color:var(--color-2);
+    color: var(--color-1);
+    box-shadow: 0 2px 4px var(--color-3);
   }
   
   thead {
-    background-color: #39993c;
-    color: white;
+    background-color: var(--color-4);
+    color: var(--color-1);
   }
   
   th, td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-5);
     text-align: center;
   }
   
   tbody tr:nth-child(even) {
-    background-color: #1e1e1e;
+    background-color: var(--color-6);
   }
   
   tbody tr:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: var(--color-5);
+    color: var(--color-7);
   }
   
   /* Mobile responsiveness */
@@ -76,7 +103,7 @@ body{
   max-width: 300px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-5);
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -89,8 +116,8 @@ body{
 }
 
 .pagination button {
-  background-color: #39993c;
-  color: white;
+  background-color: var(--color-4);
+  color: var(--color-1);
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -100,7 +127,66 @@ body{
 }
 
 .pagination button:disabled {
-  background-color: #ddd;
-  color: #999;
+  background-color: var(--color-5);
+  color: var(--color-8);
   cursor: not-allowed;
+}
+
+/*CSS properties of toggle switch*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+
+  em {
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+}
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
