@@ -58,8 +58,8 @@ function displayTable() {
   const dataToDisplay = leaderboardData.slice(startIndex, endIndex);
 
   dataToDisplay.forEach((row, index) => {
-    // Skip the first row (index 0)
-    if (index === 0) return;
+    // Skip the first row (index 0) of the first page only
+    if (index === 0 && currentPage === 1) return;
   
     const tr = document.createElement('tr');
     tr.innerHTML = `
