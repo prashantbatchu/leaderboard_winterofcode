@@ -59,7 +59,7 @@ function displayTable() {
 
   dataToDisplay.forEach((row, index) => {
     // Skip the first row (index 0) of the first page only
-    if (index === 0 && currentPage === 1) return;
+    if (row[0] === "NAME" && currentPage === 1) return;
   
     const tr = document.createElement('tr');
     tr.innerHTML = `
