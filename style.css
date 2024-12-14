@@ -97,10 +97,17 @@ tbody tr:hover {
   margin-right: auto;
 }
 
-#search-bar:focus {
-  box-shadow: 0 0 10px #7b68ee;
-  background: linear-gradient(to right, #00bcd4, #7b68ee);
+#search-bar::placeholder {
+  font-weight: bold;
+  color: white; 
 }
+
+/*label */
+label[for="search-bar"] {
+  font-weight: bold;
+  color: white; 
+}
+
 
 /* Pagination buttons */
 .pagination {
@@ -173,6 +180,10 @@ tbody tr:hover {
       padding: 8px 12px;
   }
 }
-  
+
+ 
+
+ 
+     
  
    
