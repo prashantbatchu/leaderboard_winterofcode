@@ -57,7 +57,10 @@ function displayTable() {
   const endIndex = startIndex + rowsPerPage;
   const dataToDisplay = leaderboardData.slice(startIndex, endIndex);
 
-  dataToDisplay.forEach(row => {
+  dataToDisplay.forEach((row, index) => {
+    // Skip the first row (index 0) of the first page only
+    if (row[0] === "NAME" && currentPage === 1) return;
+  
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${row[0]}</td>
@@ -69,7 +72,7 @@ function displayTable() {
     `;
     tableBody.appendChild(tr);
   });
-
+  
   document.getElementById('prev-btn').disabled = currentPage === 1;
   document.getElementById('next-btn').disabled = currentPage * rowsPerPage >= leaderboardData.length;
 }
@@ -95,3 +98,17 @@ function filterTable() {
 fetchLeaderboardData();
 
 setInterval(fetchLeaderboardData, 300000);
+
+//Javascript code to make toggle switch functional
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }    
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
