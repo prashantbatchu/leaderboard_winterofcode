@@ -4,20 +4,61 @@ let previousData = [];
 let currentPage = 1;
 let rowsPerPage = 10;
 
+// Show the loading bar and reset its state
+function showLoadingBar() {
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    const loadingBar = document.getElementById('loading-bar');
+    const loadingPercentage = document.getElementById('loading-percentage');
+
+    loadingBar.style.width = '0%'; // Reset width
+    loadingPercentage.innerText = '0%'; // Reset percentage
+    loadingBarContainer.style.display = 'block';
+}
+
+// Update the loading bar's progress
+function updateLoadingBar(percentage) {
+    const loadingBar = document.getElementById('loading-bar');
+    const loadingPercentage = document.getElementById('loading-percentage');
+
+    loadingBar.style.width = `${percentage}%`;
+    loadingPercentage.innerText = `${percentage}%`;
+}
+
+// Hide the loading bar when done
+function hideLoadingBar() {
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    loadingBarContainer.style.display = 'none';
+}
+
+// Loading Progress
+async function progressLoading() {
+    showLoadingBar();
+
+    for (let i = 1; i <= 100; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        updateLoadingBar(i);
+    }
+
+    hideLoadingBar();
+}
+
+progressLoading();
+
 // Fetch leaderboard data and handle caching
 async function fetchLeaderboardData() {
+    showLoadingBar(); // Display loading bar when fetching data
+
     try {
         const cachedData = JSON.parse(localStorage.getItem('leaderboardData'));
         const cachedTimestamp = localStorage.getItem('leaderboardTimestamp');
         const now = Date.now();
 
         // Use cached data if within 5 minutes
-        if (cachedData && cachedTimestamp && now - cachedTimestamp < 300000) {
+        if (cachedData && cachedTimestamp && now - cachedTimestamp < 300) {
             console.log('Using cached data');
             leaderboardData = cachedData;
             originalData = [...leaderboardData];
-            previousData = leaderboardData;
-            displayTable();
+            previousData = leaderboardData;            
             return;
         }
 
@@ -47,6 +88,9 @@ async function fetchLeaderboardData() {
                 displayTable();
             }
         }
+    } finally {
+        // Hide the loading bar
+        hideLoadingBar();
     }
 }
 
