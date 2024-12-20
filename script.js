@@ -54,7 +54,7 @@ async function fetchLeaderboardData() {
         const now = Date.now();
 
         // Use cached data if within 5 minutes
-        if (cachedData && cachedTimestamp && now - cachedTimestamp < 300) {
+        if (cachedData && cachedTimestamp && now - cachedTimestamp < 300000) {
             console.log('Using cached data');
             leaderboardData = cachedData;
             originalData = [...leaderboardData];
