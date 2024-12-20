@@ -30,20 +30,6 @@ function hideLoadingBar() {
     loadingBarContainer.style.display = 'none';
 }
 
-// Loading Progress
-async function progressLoading() {
-    showLoadingBar();
-
-    for (let i = 1; i <= 100; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 50));
-        updateLoadingBar(i);
-    }
-
-    hideLoadingBar();
-}
-
-progressLoading();
-
 // Fetch leaderboard data and handle caching
 async function fetchLeaderboardData() {
     showLoadingBar(); // Display loading bar when fetching data
@@ -58,13 +44,30 @@ async function fetchLeaderboardData() {
             console.log('Using cached data');
             leaderboardData = cachedData;
             originalData = [...leaderboardData];
-            previousData = leaderboardData;            
+            previousData = leaderboardData;
+            
+            updateLoadingBar(100);
+            hideLoadingBar();
+
+            displayTable();
             return;
         }
 
         // Fetch new data
         const response = await fetch('https://script.google.com/macros/s/AKfycbx2_dsVB0Z1dX8l_m7VGy_8VB0qFts5PlWbx_mZwD6jxaq-hdxxBDvK_dKwzIqJt8LgEQ/exec');
         leaderboardData = await response.json();
+
+        // Update loading bar based on the percentage of rows processed
+        const totalRows = leaderboardData.length;
+        const chunkSize = Math.ceil(totalRows / 10);
+
+        for (let i = 0; i < totalRows; i += chunkSize) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+
+            const percentage = Math.min(((i + chunkSize) / totalRows) * 100, 100);
+            updateLoadingBar(Math.floor(percentage));
+        }
+
         originalData = [...leaderboardData];
         previousData = leaderboardData;
 
