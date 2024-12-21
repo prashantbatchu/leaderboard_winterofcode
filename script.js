@@ -4,8 +4,40 @@ let previousData = [];
 let currentPage = 1;
 let rowsPerPage = 10;
 
+// Show the loading bar and reset its state
+function showLoadingBar() {
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    const loadingBar = document.getElementById('loading-bar');
+    const loadingPercentage = document.getElementById('loading-percentage');
+    const loadingMessage = document.getElementById('loading-message');
+
+    loadingBar.style.width = '0%'; // Reset width
+    loadingPercentage.innerText = '0%'; // Reset percentage
+    loadingBarContainer.style.display = 'block';
+    loadingMessage.style.display = 'block';
+}
+
+// Update the loading bar's progress
+function updateLoadingBar(percentage) {
+    const loadingBar = document.getElementById('loading-bar');
+    const loadingPercentage = document.getElementById('loading-percentage');
+
+    loadingBar.style.width = `${percentage}%`;
+    loadingPercentage.innerText = `${percentage}%`;
+}
+
+// Hide the loading bar when done
+function hideLoadingBar() {
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    const loadingMessage = document.getElementById('loading-message');
+    loadingBarContainer.style.display = 'none';
+    loadingMessage.style.display = 'none';
+}
+
 // Fetch leaderboard data and handle caching
 async function fetchLeaderboardData() {
+    showLoadingBar(); // Display loading bar when fetching data
+
     try {
         const cachedData = JSON.parse(localStorage.getItem('leaderboardData'));
         const cachedTimestamp = localStorage.getItem('leaderboardTimestamp');
@@ -17,6 +49,10 @@ async function fetchLeaderboardData() {
             leaderboardData = cachedData;
             originalData = [...leaderboardData];
             previousData = leaderboardData;
+            
+            updateLoadingBar(100);
+            hideLoadingBar();
+
             displayTable();
             return;
         }
@@ -24,6 +60,18 @@ async function fetchLeaderboardData() {
         // Fetch new data
         const response = await fetch('https://script.google.com/macros/s/AKfycbx2_dsVB0Z1dX8l_m7VGy_8VB0qFts5PlWbx_mZwD6jxaq-hdxxBDvK_dKwzIqJt8LgEQ/exec');
         leaderboardData = await response.json();
+
+        // Update loading bar based on the percentage of rows processed
+        const totalRows = leaderboardData.length;
+        const chunkSize = Math.ceil(totalRows / 10);
+
+        for (let i = 0; i < totalRows; i += chunkSize) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+
+            const percentage = Math.min(((i + chunkSize) / totalRows) * 100, 100);
+            updateLoadingBar(Math.floor(percentage));
+        }
+
         originalData = [...leaderboardData];
         previousData = leaderboardData;
 
@@ -47,6 +95,9 @@ async function fetchLeaderboardData() {
                 displayTable();
             }
         }
+    } finally {
+        // Hide the loading bar
+        hideLoadingBar();
     }
 }
 
