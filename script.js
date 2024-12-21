@@ -9,10 +9,12 @@ function showLoadingBar() {
     const loadingBarContainer = document.getElementById('loading-bar-container');
     const loadingBar = document.getElementById('loading-bar');
     const loadingPercentage = document.getElementById('loading-percentage');
+    const loadingMessage = document.getElementById('loading-message');
 
     loadingBar.style.width = '0%'; // Reset width
     loadingPercentage.innerText = '0%'; // Reset percentage
     loadingBarContainer.style.display = 'block';
+    loadingMessage.style.display = 'block';
 }
 
 // Update the loading bar's progress
@@ -27,7 +29,9 @@ function updateLoadingBar(percentage) {
 // Hide the loading bar when done
 function hideLoadingBar() {
     const loadingBarContainer = document.getElementById('loading-bar-container');
+    const loadingMessage = document.getElementById('loading-message');
     loadingBarContainer.style.display = 'none';
+    loadingMessage.style.display = 'none';
 }
 
 // Fetch leaderboard data and handle caching

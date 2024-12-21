@@ -181,6 +181,14 @@ label[for="search-bar"] {
   transition: width 0.3s ease-in-out;
 }
 
+#loading-message {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #e1dada;
+  font-weight: bold;
+  text-align: center;
+}
+
 #loading-percentage {
   position: absolute;
   top: 50%;
