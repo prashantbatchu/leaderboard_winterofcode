@@ -244,3 +244,36 @@ label[for="search-bar"] {
       padding: 8px 12px;
   }
 }
+
+.sort-search{
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-sort{
+  margin: 20px 20px 0 0;
+}
+
+.asce-desc{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.asce-desc button {
+  background: linear-gradient(to right, #7b68ee, #00bcd4); 
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 5px 10px 15px 15px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}

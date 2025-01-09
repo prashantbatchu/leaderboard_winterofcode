@@ -35,8 +35,8 @@ function hideLoadingBar() {
 }
 
 // Fetch leaderboard data and handle caching
-async function fetchLeaderboardData() {
-    showLoadingBar(); // Display loading bar when fetching data
+async function fetchLeaderboardData(startIndex = 1) {
+    showLoadingBar(); 
 
     try {
         const cachedData = JSON.parse(localStorage.getItem('leaderboardData'));
@@ -46,10 +46,10 @@ async function fetchLeaderboardData() {
         // Use cached data if within 5 minutes
         if (cachedData && cachedTimestamp && now - cachedTimestamp < 300000) {
             console.log('Using cached data');
-            leaderboardData = cachedData;
+            leaderboardData = cachedData.slice(startIndex); 
             originalData = [...leaderboardData];
             previousData = leaderboardData;
-            
+
             updateLoadingBar(100);
             hideLoadingBar();
 
@@ -59,14 +59,15 @@ async function fetchLeaderboardData() {
 
         // Fetch new data
         const response = await fetch('https://script.google.com/macros/s/AKfycbx2_dsVB0Z1dX8l_m7VGy_8VB0qFts5PlWbx_mZwD6jxaq-hdxxBDvK_dKwzIqJt8LgEQ/exec');
-        leaderboardData = await response.json();
+        const rawData = await response.json();
 
-        // Update loading bar based on the percentage of rows processed
+        leaderboardData = rawData.slice(startIndex);
+
         const totalRows = leaderboardData.length;
         const chunkSize = Math.ceil(totalRows / 10);
 
         for (let i = 0; i < totalRows; i += chunkSize) {
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise((resolve) => setTimeout(resolve, 50));
 
             const percentage = Math.min(((i + chunkSize) / totalRows) * 100, 100);
             updateLoadingBar(Math.floor(percentage));
@@ -76,21 +77,21 @@ async function fetchLeaderboardData() {
         previousData = leaderboardData;
 
         displayTable();
-        localStorage.setItem('leaderboardData', JSON.stringify(leaderboardData));
+        localStorage.setItem('leaderboardData', JSON.stringify(rawData)); 
         localStorage.setItem('leaderboardTimestamp', Date.now());
     } catch (error) {
         console.error('Error fetching leaderboard data:', error);
 
         if (previousData.length > 0) {
             console.warn('Using fallback data');
-            leaderboardData = previousData;
+            leaderboardData = previousData.slice(startIndex);
             originalData = [...leaderboardData];
             displayTable();
         } else {
             console.warn('Using cached data as fallback');
             const fallbackData = JSON.parse(localStorage.getItem('leaderboardData'));
             if (fallbackData) {
-                leaderboardData = fallbackData;
+                leaderboardData = fallbackData.slice(startIndex);
                 originalData = [...leaderboardData];
                 displayTable();
             }
@@ -101,6 +102,7 @@ async function fetchLeaderboardData() {
     }
 }
 
+
 // Display table content
 function displayTable() {
     const tableBody = document.getElementById('leaderboard')?.querySelector('tbody');
@@ -109,17 +111,18 @@ function displayTable() {
         return;
     }
 
-    tableBody.innerHTML = '';
+    tableBody.innerHTML = ''; 
 
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
     const dataToDisplay = leaderboardData.slice(startIndex, endIndex);
 
-    dataToDisplay.forEach(row => {
-        if (row[0]?.toLowerCase() === 'name') return;
-
+    dataToDisplay.forEach((row, index) => {
+        // if (row[0]?.toLowerCase() === 'name') return;
+        const serialNumber = startIndex + index + 1; 
         const tr = document.createElement('tr');
         tr.innerHTML = `
+            <td>${serialNumber}</td> 
             <td>${row[0]}</td>
             <td>${row[1]}</td>
             <td>${row[2]}</td>
@@ -214,3 +217,26 @@ function updatePagination() {
 
 fetchLeaderboardData();
 setInterval(fetchLeaderboardData, 300000);
+
+function sortLeaderboardByColumn5Descending() {
+    leaderboardData.sort((a, b) => {
+        const valueA = parseFloat(a[5]) || 0; 
+        const valueB = parseFloat(b[5]) || 0; 
+        return valueB - valueA; 
+    });
+
+    currentPage = 1;
+    displayTable();
+}
+
+
+function sortLeaderboardByColumn5Ascending() {
+    leaderboardData.sort((a, b) => {
+        const valueA = parseFloat(a[5]) || 0; 
+        const valueB = parseFloat(b[5]) || 0; 
+        return valueA - valueB; 
+    });
+
+    currentPage = 1; 
+    displayTable();
+}
